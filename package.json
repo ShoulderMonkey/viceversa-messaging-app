@@ -2,7 +2,12 @@
   "name": "@viceversa-messaging-app/source",
   "version": "0.0.0",
   "license": "MIT",
-  "scripts": {},
+  "scripts": {
+    "api:dev": "npx nx run api:serve",
+    "api:build": "npx nx build api",
+    "web:dev": "npx nx run web:serve",
+    "web:build": "npx nx build web"
+  },
   "private": true,
   "devDependencies": {
     "@angular-devkit/core": "~20.3.0",
