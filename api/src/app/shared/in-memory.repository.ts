@@ -1,7 +1,8 @@
 import { BaseEntity } from "./base-entity";
+import { BaseFilter } from "./base-filter";
 import { PaginatedResult, PaginationOptions } from "./pagination.types";
 
-export abstract class InMemoryRepository<T extends BaseEntity, F> {
+export abstract class InMemoryRepository<T extends BaseEntity, F extends BaseFilter<T>> {
 
     protected readonly items: T[] = [];
 
@@ -16,7 +17,7 @@ export abstract class InMemoryRepository<T extends BaseEntity, F> {
     }
 
     findMany(filters: F, pagination: PaginationOptions = {}): PaginatedResult<T> {
-        let results = this.items.filter(item => this.matchesFilter(item, filters));
+        let results = this.items.filter(item => filters.matches(item));
 
         const { page = 1, limit = results.length } = pagination;
         const startIndex = (page - 1) * limit;
@@ -35,6 +36,4 @@ export abstract class InMemoryRepository<T extends BaseEntity, F> {
             limit,
         };
     }
-
-    protected abstract matchesFilter(entity: T, filter: F): boolean;
 }
