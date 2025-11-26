@@ -1,8 +1,8 @@
 import { BadRequestException } from "@nestjs/common";
 
 export abstract class BaseEntity {
-  id: string;
-  createdAt: Date;
+  id?: string;
+  createdAt?: Date;
 
   abstract validationFn?: (entity: BaseEntity) => boolean;
 

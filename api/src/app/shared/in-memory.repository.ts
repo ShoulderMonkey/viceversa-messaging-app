@@ -1,3 +1,4 @@
+import { NotFoundException } from "@nestjs/common";
 import { BaseEntity } from "./base-entity";
 import { BaseFilter } from "./base-filter";
 import { PaginatedResult, PaginationOptions } from "./pagination.types";
@@ -40,5 +41,12 @@ export abstract class InMemoryRepository<T extends BaseEntity, F extends BaseFil
 
     getAll(): T[] {
         return this.items;
+    }
+
+    findById(id: string){
+        const result = this.items.find((i) => i.id === id)
+        if(!result)
+            throw new NotFoundException()
+        return result 
     }
 }
