@@ -11,7 +11,7 @@ export abstract class BaseFilter<T extends BaseEntity> {
     createdAtTo?: Date;
 
     constructor(
-        init?: Partial<BaseFilter<T>>
+        init?: Partial<BaseFilter<T> & Record<string, any>>
     ) {
         Object.assign(this, init);
     }

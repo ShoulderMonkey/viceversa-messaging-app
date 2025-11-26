@@ -1,6 +1,6 @@
 import { Message } from "../../models/message.entity";
 
-export const MESSAGE_SEEDS: Message[] = [
+/* export const MESSAGE_SEEDS: Message[] = [
     {
         id: 'message-1',
         senderId: 'user-1',
@@ -15,4 +15,4 @@ export const MESSAGE_SEEDS: Message[] = [
         body: 'Hi, Alice! How are you?',
         createdAt: new Date(),
     }
-]
+] */
