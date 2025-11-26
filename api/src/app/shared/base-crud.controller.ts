@@ -1,11 +1,12 @@
-import { Body, Get, Post, Query } from "@nestjs/common";
+import { Body, Get, Post, Query, UseGuards } from "@nestjs/common";
 import { BaseEntity } from "./base-entity";
 import { BaseFilter } from "./base-filter";
 import { InMemoryRepository } from "./in-memory.repository";
 import { PaginationOptions } from "./pagination.types";
+import { JWTGuard } from "../auth/strategies/jwt.strategy";
 
 type FilterConstructor<T extends BaseEntity, F extends BaseFilter<T>> = new (init?: Partial<F>) => F;
-
+@UseGuards(JWTGuard)
 export abstract class BaseCRUDController<T extends BaseEntity, F extends BaseFilter<T>> {
 
     constructor(

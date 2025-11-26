@@ -1,5 +1,5 @@
 import { User, USER_MOCKS, USER_MOCKS_FAULTY } from '../models/user.entity';
-import { BaseInMemoryRepositoryTest } from '../shared/in-memory.repository.spec';
+import { BaseInMemoryRepositoryTest } from '../shared/in-memory.repository.test';
 import { UserFilter } from './user.filter';
 import { UserService } from './user.service';
 

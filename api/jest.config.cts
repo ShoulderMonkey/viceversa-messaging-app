@@ -7,4 +7,5 @@ module.exports = {
   },
   moduleFileExtensions: ['ts', 'js', 'html'],
   coverageDirectory: '../coverage/api',
+  testPathIgnorePatterns: ["/node_modules/", "in-memory.repository.test.ts"],
 };
