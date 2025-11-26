@@ -3,12 +3,18 @@ import { BaseEntity } from "./base-entity";
 import { BaseFilter } from "./base-filter";
 import { PaginatedResult, PaginationOptions } from "./pagination.types";
 
+type EntityConstructor<T extends BaseEntity> = new (init?: Partial<T>) => T;
 export abstract class InMemoryRepository<T extends BaseEntity, F extends BaseFilter<T>> {
+
+    constructor(
+        private readonly entityCtor: EntityConstructor<T>
+    ){}
 
     items: T[] = [];
 
     createOne(item: T): T {
         const entity = {
+            ...new this.entityCtor(),
             ...item,
             createdAt: new Date(),
             id: item.id?item.id:crypto.randomUUID(),
