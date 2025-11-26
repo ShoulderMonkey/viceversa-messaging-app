@@ -2,14 +2,14 @@ import { Module } from '@nestjs/common';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { JwtModule } from '@nestjs/jwt';
 
-import { readFileSync } from 'fs';
-import { join } from 'path';
 import { UserModule } from '../user/user.module';
 import { AuthController } from './auth.controller';
 import { AuthService } from './auth.service';
 import { CryptoService } from './crypto';
 import { JwtStrategy } from './strategies/jwt.strategy';
 import { UsernameAuthGuard, UsernameStrategy } from './strategies/username.strategy';
+import { readFileSync } from 'fs';
+import { join } from 'path';
 
 @Module({
   imports: [
@@ -20,14 +20,14 @@ import { UsernameAuthGuard, UsernameStrategy } from './strategies/username.strat
 
       useFactory: (config: ConfigService) => {
         return {
-          privateKey: config.get('auth.keys.private'), //for quick setup, normally stored locally for dev environment
-          publicKey: config.get('auth.keys.public'),
+          privateKey: readFileSync(join(__dirname, './assets/keys/private.pem')),
+          publicKey: readFileSync(join(__dirname, './assets/keys/public.pem')),
           signOptions: { algorithm: 'RS256' }
         };
       }
-    })    
+    })
   ],
-  controllers: [AuthController, ],
+  controllers: [AuthController],
   exports: [
     AuthService,
     JwtStrategy,

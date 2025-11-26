@@ -1,29 +1,30 @@
 import { Injectable, UnauthorizedException } from "@nestjs/common";
 import { PassportStrategy } from "@nestjs/passport";
-import { Strategy } from 'passport-local';
+import { Strategy as CustomStrategy } from 'passport-custom';
 import { AuthService } from "../auth.service";
 import { AuthGuard } from '@nestjs/passport';
 
 @Injectable()
-export class UsernameStrategy extends PassportStrategy(Strategy, 'username') {
+export class UsernameStrategy extends PassportStrategy(CustomStrategy, 'username') {
   constructor(private readonly authService: AuthService) {
-    super({
-      usernameField: 'username', // look for req.body.username
-      passwordField: 'password', // will be undefined if you don't send it
-    });
+    super();
   }
 
-  async validate(username: string): Promise<any> {
-    console.log('trying to validate');
-    
-    // password arg is ignored on purpose
+  async validate(req: any): Promise<any> {
+    const { username } = req.body;
+
+    if (!username) {
+      throw new UnauthorizedException('Username is required');
+    }
+
+    // Your custom lookup logic
     const user = await this.authService.validateByUsername(username);
 
     if (!user) {
-      throw new UnauthorizedException('Invalid username #should not give out this information. Just for demo purpose');
+      throw new UnauthorizedException('Invalid username');
     }
 
-    // whatever you return here gets attached to req.user
+    // Whatever you return here becomes req.user
     return user;
   }
 }

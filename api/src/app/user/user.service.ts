@@ -2,6 +2,7 @@ import { Injectable } from '@nestjs/common';
 import { InMemoryRepository } from '../shared/in-memory.repository';
 import { User } from '../models/user.entity';
 import { UserFilter } from './user.filter';
+import { PaginationOptions } from '../shared/pagination.types';
 
 @Injectable()
 export class UserService extends InMemoryRepository<User, UserFilter>{
@@ -12,6 +13,12 @@ export class UserService extends InMemoryRepository<User, UserFilter>{
 
     findByUsername(username: string){
         const filter = new UserFilter({username})
-        return this.findMany(filter).data[0]
+        console.log(filter);
+        console.log('getAll test', this.getAll());
+        
+        const results = this.findMany(filter, new PaginationOptions())
+        console.log(results);
+        return results.data[0]
+        
     }
 }

@@ -20,7 +20,7 @@ export class JwtStrategy extends PassportStrategy(Strategy, "jwt") {
     super({
       jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken(),
       ignoreExpiration: false,
-      secretOrKey: config.get('auth.keys.public'),
+      secretOrKey: readFileSync(join(__dirname, './assets/keys/public.pem')),
       algorithms: ['RS256']
     });
   }
@@ -31,7 +31,7 @@ export class JwtStrategy extends PassportStrategy(Strategy, "jwt") {
 
       if (!user) {
         throw new ForbiddenException('User not found');
-      }    
+      }
       
     return {
       ...user
