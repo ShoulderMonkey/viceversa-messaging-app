@@ -4,7 +4,7 @@ import { PaginatedResult, PaginationOptions } from "./pagination.types";
 
 export abstract class InMemoryRepository<T extends BaseEntity, F extends BaseFilter<T>> {
 
-    protected readonly items: T[] = [];
+    items: T[] = [];
 
     createOne(item: T): T {
         const entity = {
@@ -12,6 +12,7 @@ export abstract class InMemoryRepository<T extends BaseEntity, F extends BaseFil
             createdAt: new Date(),
             id: crypto.randomUUID(),
         }
+        entity.validationFn(entity);
         this.items.push(entity);
         return entity;
     }
@@ -35,5 +36,9 @@ export abstract class InMemoryRepository<T extends BaseEntity, F extends BaseFil
             page,
             limit,
         };
+    }
+
+    getAll(): T[] {
+        return this.items;
     }
 }

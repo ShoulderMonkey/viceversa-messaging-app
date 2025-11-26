@@ -42,11 +42,10 @@ export abstract class BaseFilter<T extends BaseEntity> {
      * @returns boolean indicating if the field matches the value
      */
     exactMatch(entity: T, field: any/* keyof BaseFilter<T> */, value: any): boolean {
-        try {
-            return entity[field] === value;
-        } catch (error) {
-            throw new BadRequestException(`Invalid field for exact match: ${field}`);
-        }
+        if (entity[field] === undefined) {
+            throw new BadRequestException(`Field ${field} does not exist on entity`);
+        }       
+        return entity[field] === value;
     }
 
     /**
@@ -60,8 +59,7 @@ export abstract class BaseFilter<T extends BaseEntity> {
     dateMatch(entity: T, field: keyof T, from?: Date, to?: Date): boolean {
         const fromDate = from ? new Date(from) : null;
         const toDate = to ? new Date(to) : null;
-
-        if (fromDate && entity[field] < fromDate) {
+        if (fromDate && (entity[field] as Date) < fromDate) {            
             return false;
         }
         if (toDate && entity[field] > toDate) {
