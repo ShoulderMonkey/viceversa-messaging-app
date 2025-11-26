@@ -11,14 +11,14 @@ export abstract class InMemoryRepository<T extends BaseEntity, F extends BaseFil
         const entity = {
             ...item,
             createdAt: new Date(),
-            id: crypto.randomUUID(),
+            id: item.id?item.id:crypto.randomUUID(),
         }
         entity.validationFn(entity);
         this.items.push(entity);
         return entity;
     }
 
-    findMany(filters: F, pagination: PaginationOptions = {}): PaginatedResult<T> {
+    findMany(filters?: F, pagination: PaginationOptions = {}): PaginatedResult<T> {
         let results = this.items.filter(item => filters.matches(item));
 
         const { page = 1, limit = results.length } = pagination;
