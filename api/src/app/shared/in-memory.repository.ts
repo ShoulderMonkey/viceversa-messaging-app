@@ -21,7 +21,7 @@ export abstract class InMemoryRepository<T extends BaseEntity, F extends BaseFil
     findMany(filters?: F, pagination: PaginationOptions = {}): PaginatedResult<T> {
         let results = this.items.filter(item => filters.matches(item));
 
-        const { page = 1, limit = results.length } = pagination;
+        const { page, limit} = pagination;
         const startIndex = (page - 1) * limit;
         const endIndex = startIndex + limit;
 
