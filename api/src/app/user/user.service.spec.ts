@@ -1,18 +1,31 @@
-import { Test, TestingModule } from '@nestjs/testing';
+import { User, USER_MOCKS, USER_MOCKS_FAULTY } from '../models/user.entity';
+import { BaseInMemoryRepositoryTest } from '../shared/in-memory.repository.spec';
+import { UserFilter } from './user.filter';
 import { UserService } from './user.service';
 
-describe('UserService', () => {
-  let service: UserService;
+class UserServiceTest extends BaseInMemoryRepositoryTest<User, UserFilter> {
+    getService(){
+      return UserService;
+    }
 
-  beforeEach(async () => {
-    const module: TestingModule = await Test.createTestingModule({
-      providers: [UserService],
-    }).compile();
+    getEntity(){
+      return User;
+    }
 
-    service = module.get<UserService>(UserService);
-  });
+    getEntitiesMock(){
+      return USER_MOCKS
+    }
 
-  it('should be defined', () => {
-    expect(service).toBeDefined();
-  });
-});
+    getEntitiesMockFaulty(): User[] {
+      return USER_MOCKS_FAULTY
+    }
+
+    otherTests(): void {
+    }
+
+}
+
+// Run the tests
+const testInstance = new UserServiceTest();
+testInstance.runTests();
+
