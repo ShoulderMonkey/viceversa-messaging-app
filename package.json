@@ -7,7 +7,8 @@
     "api:dev": "npx nx run api:serve",
     "api:build": "npx nx build api",
     "web:dev": "npx nx run web:serve",
-    "web:build": "npx nx build web"
+    "web:build": "npx nx build web",
+    "models:align": "npx tsx align-models.ts libs/api-interfaces/src/lib/models"
   },
   "private": true,
   "devDependencies": {
@@ -67,6 +68,8 @@
     "@nestjs/platform-express": "^11.0.0",
     "axios": "^1.6.0",
     "bcrypt": "^6.0.0",
+    "jwt-decode": "^4.0.0",
+    "ngx-toastr": "^19.1.0",
     "passport-custom": "^1.1.1",
     "passport-jwt": "^4.0.1",
     "passport-local": "^1.0.0",
