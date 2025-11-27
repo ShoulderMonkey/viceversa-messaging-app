@@ -3,6 +3,7 @@ import { FormControl, ReactiveFormsModule, Validators } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
+import { UserService } from '../services/user.service';
 
 @Component({
   selector: 'app-register',
@@ -17,13 +18,14 @@ import { MatInputModule } from '@angular/material/input';
 })
 export class Register {
   
-  usernameControl = new FormControl(null, Validators.required)
+  usernameControl = new FormControl('', Validators.required)
 
-  constructor(){}
+  constructor(
+    private userService: UserService
+  ){}
 
   register(){
-    const username = this.usernameControl.value
-
-    
+    const username = this.usernameControl.value!
+    this.userService.createOne({username})
   }
 }

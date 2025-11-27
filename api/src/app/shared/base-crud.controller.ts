@@ -2,8 +2,9 @@ import { Body, Get, Logger, Post, Query, UseGuards } from "@nestjs/common";
 import { BaseEntity } from "./base-entity";
 import { BaseFilter } from "./base-filter";
 import { InMemoryRepository } from "./in-memory.repository";
-import { PaginationOptions } from "./pagination.types";
+
 import { JWTGuard } from "../auth/strategies/jwt.strategy";
+import { PaginationOptions } from "./pagination.types";
 
 type FilterConstructor<T extends BaseEntity, F extends BaseFilter<T>> = new (init?: Partial<F>) => F;
 @UseGuards(JWTGuard)
@@ -23,7 +24,7 @@ export abstract class BaseCRUDController<T extends BaseEntity, F extends BaseFil
         return this.service.createOne(body)
     }
 
-    @Get('findMany')
+    @Get('find-many')
     findMany(
         @Query() queryParams: any /* F and PaginationOptions combined*/) {
         const { page, limit, ...filterParams } = queryParams;
@@ -38,7 +39,9 @@ export abstract class BaseCRUDController<T extends BaseEntity, F extends BaseFil
     }
 
     @Get()
-    getAll() {
-        return this.service.getAll()
+    getAll( @Query() queryParams: any) {
+        const { page, limit} = queryParams
+        const pagination = new PaginationOptions({ page, limit });
+        return this.service.getAll(pagination)
     }
 }

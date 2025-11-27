@@ -45,8 +45,25 @@ export abstract class InMemoryRepository<T extends BaseEntity, F extends BaseFil
         };
     }
 
-    getAll(): T[] {
-        return this.items;
+    getAll(pagination: PaginationOptions = {}): PaginatedResult<T> {
+        let results = this.items 
+
+        const { page, limit} = pagination;
+        const startIndex = (page - 1) * limit;
+        const endIndex = startIndex + limit;
+
+        results = results.slice(startIndex, endIndex);
+
+        const total = results.length;
+        const start = (page - 1) * limit;
+        const data = results.slice(start, start + limit);
+
+        return {
+            data,
+            total,
+            page,
+            limit,
+        };
     }
 
     findById(id: string){

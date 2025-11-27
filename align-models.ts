@@ -12,7 +12,10 @@ export interface EntityModel {
 
 const abstractEntitiesPaths = [
   path.join(__dirname, 'api/src/app/shared/base-entity.ts'),
-  path.join(__dirname, 'api/src/app/shared/base-filter.ts')
+  path.join(__dirname, 'api/src/app/shared/base-filter.ts'),
+  path.join(__dirname, 'api/src/app/shared/pagination-results.ts'),
+  path.join(__dirname, 'api/src/app/shared/pagination-options.ts')
+
 ]
 
 const inputDir = process.argv[2]

@@ -2,10 +2,10 @@
     <h1>LOGIN</h1>
     <mat-form-field appearance="outline">
         <mat-label>User name</mat-label>
-        <input matInput>
+        <input matInput [formControl]="usernameControl">
     </mat-form-field>
     <div class="buttons-container">
-        <button matButton="filled">Login</button>
+        <button matButton="filled" (click)="login()">Login</button>
         <button matButton="outlined">Register</button>
     </div>
 </div>

@@ -17,6 +17,8 @@
     "paths": {
       "@viceversa-messaging-app/api-interfaces": ["libs/api-interfaces/src/index.ts"],
       "@viceversa-messaging-app/auth": ["libs/auth/src/index.ts"],
+      "@viceversa-messaging-app/utils": ["libs/utils/src/index.ts"],
+
     }
   },
   "exclude": ["node_modules", "tmp"]
