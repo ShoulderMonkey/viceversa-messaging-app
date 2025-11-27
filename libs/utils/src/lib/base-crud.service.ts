@@ -16,8 +16,8 @@ export abstract class BaseCRUDService<T> extends BaseHttpService{
         super(http)
     }
 
-    getAll(){
-        return this.get<T>(this.endpointUrl)
+    getAll(paginationParams: PaginationParams){
+        return this.get(this.endpointUrl, {params: {...paginationParams}})
     }
 
     createOne(entity: T){
