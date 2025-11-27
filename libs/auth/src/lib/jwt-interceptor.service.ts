@@ -2,16 +2,16 @@ import { HttpEvent, HttpHandler, HttpInterceptor, HttpRequest } from '@angular/c
 import { Inject, Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 
-import { AUTH_COOKIE_NAME } from './constants';
+import { AuthOptions } from './auth-options';
 
 @Injectable()
 export class JwtInterceptorService implements HttpInterceptor {
   constructor(
-    @Inject(AUTH_COOKIE_NAME)private readonly authCookieName: string,
+    private authOptions: AuthOptions
   ) { }
 
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
-    const token = localStorage.getItem(this.authCookieName)
+    const token = localStorage.getItem(this.authOptions.authCookieName!)
     if (token) {
       req = req.clone({
         setHeaders: {
