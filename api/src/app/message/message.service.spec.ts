@@ -49,9 +49,7 @@ class MessageServiceTest extends BaseInMemoryRepositoryTest<Message, MessageFilt
 
         const validationSpy = jest.spyOn(this.service as any, 'checkDuplicatedMessages');
 
-        //duplicate run
-        console.log('different message', differentMessage);
-        
+        //duplicate run      
         expect(this.service.createOne(differentMessage)).toBeDefined()
 
         expect(validationSpy).toHaveBeenCalled();
