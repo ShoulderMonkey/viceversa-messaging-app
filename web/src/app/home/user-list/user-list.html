@@ -1,7 +1,7 @@
 <h2>Select a user to message</h2>
 <div class="list-container">
     @for (user of users; track $index) {
-        <div class="card" (click)="messageUser()">
+        <div class="card" (click)="messageUser(user)">
             <span class="header">
                 <mat-icon>person</mat-icon>
                 {{user.username}}

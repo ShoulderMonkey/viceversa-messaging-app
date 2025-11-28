@@ -6,10 +6,7 @@
 
 .card {
     cursor: pointer;
-    display: flex;
-    border-radius: 10px;
     background-color: var(--mat-sys-primary-container);
-    padding: 10px 16px;
     justify-content: space-between;
     .header{
         display: flex;

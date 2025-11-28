@@ -1,0 +1,20 @@
+<div class="main-container">
+    <div class="recipient-user-header card">
+        <h1>Your chat with {{recipientUser?.username}}</h1>
+    </div>
+    <div class="chat-container">
+        @for (message of messages; track $index) {
+        <div class="card" [ngClass]="isMessageReceived(message)? 'received': 'sent'">
+            {{message.body}}
+        </div>
+        }
+    </div>
+    <div class="input">
+        <mat-form-field appearance="outline">
+            <input matInput [formControl]="inputControl">
+            <button matIconButton [disabled]="inputControl.invalid" (click)="sendMessage()" matSuffix>
+                <mat-icon>send</mat-icon>
+            </button>
+        </mat-form-field>
+    </div>
+</div>

@@ -4,6 +4,7 @@ import { UserService } from '../../services/user.service';
 import { map, Observable, tap } from 'rxjs';
 import { MatIconModule } from "@angular/material/icon";
 import { AuthService } from '@viceversa-messaging-app/auth';
+import { Router } from '@angular/router';
 @Component({
   selector: 'app-user-list',
   imports: [
@@ -17,7 +18,8 @@ export class UserList {
   $users?: Observable<User[]>
   constructor(
     private userService: UserService,
-    private authService: AuthService
+    private authService: AuthService,
+    private router: Router
   ){
     this.getUsers()
   }
@@ -32,8 +34,8 @@ export class UserList {
     this.$users.subscribe()
   }
 
-  messageUser(){
-    
+  messageUser(user: User){
+    this.router.navigate(['/chat', user.id])
   }
 
 }

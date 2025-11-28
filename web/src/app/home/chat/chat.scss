@@ -1,0 +1,31 @@
+:host{
+    width: 300px;
+}
+
+.main-container{
+    display:flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.chat-container{
+    display:flex;
+    flex-direction: column;
+    gap:5px;
+
+    .sent{
+        width: 80%;
+        background-color: var(--mat-sys-secondary-container);
+        align-self: flex-end;
+    }
+
+    .received{
+        width: 80%;
+        background-color: var(--mat-sys-tertiary-container);
+    }
+}
+
+.input{
+    display: flex;
+    flex-direction: column;
+}
