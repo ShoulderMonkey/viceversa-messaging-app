@@ -79,7 +79,7 @@ export abstract class BaseInMemoryRepositoryTest<Entity extends BaseEntity, Filt
                     // Use `as any` to bypass a complex TypeScript type inference issue with jest.spyOn and generics
                     //const validationSpy = jest.spyOn(entity as any, 'validationFn');
 
-                    await expect(()=> this.service.createOne(entity)).toThrow();
+                    expect(()=> this.service.createOne(entity)).toThrow();
                     //expect(validationSpy).toHaveBeenCalled();
                     //expect(this.mockRepository.save).not.toHaveBeenCalled();
                     //validationSpy.mockRestore();
