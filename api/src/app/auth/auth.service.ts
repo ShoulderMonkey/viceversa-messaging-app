@@ -29,7 +29,8 @@ export class AuthService {
 
   async login(validatedUser: any) {
     const payload = {
-      id: validatedUser.id
+      id: validatedUser.id,
+      username: validatedUser.username
     };
     const access_token = this.jwtService.sign(payload, {
       expiresIn: this.config.get("auth.expiresIn")
