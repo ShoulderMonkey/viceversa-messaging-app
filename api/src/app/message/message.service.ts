@@ -1,9 +1,7 @@
 import { BadRequestException, Injectable, Logger } from '@nestjs/common';
-import { InMemoryRepository } from '../shared/in-memory.repository';
 import { Message } from '../models/message.entity';
+import { InMemoryRepository } from '../shared/in-memory.repository';
 import { MessageFilter } from './message.filter';
-import { PaginationOptions } from '../shared/pagination.types';
-import { ConfigService } from '@nestjs/config';
 
 @Injectable()
 export class MessageService extends InMemoryRepository<Message, MessageFilter> {
