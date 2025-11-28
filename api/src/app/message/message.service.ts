@@ -1,4 +1,4 @@
-import { Injectable, Logger } from '@nestjs/common';
+import { BadRequestException, Injectable, Logger } from '@nestjs/common';
 import { InMemoryRepository } from '../shared/in-memory.repository';
 import { Message } from '../models/message.entity';
 import { MessageFilter } from './message.filter';
@@ -37,6 +37,6 @@ export class MessageService extends InMemoryRepository<Message, MessageFilter> {
         })
         const foundPossibleDuplicate = this.findMany(filter).data[0]
         if (foundPossibleDuplicate)
-            throw new Error('Duplicate message')
+            throw new BadRequestException('Duplicate message')
     }
 }
