@@ -1,3 +1,4 @@
+import { ConfigService } from '@nestjs/config';
 import { Message, MESSAGE_MOCKS, MESSAGE_MOCKS_FAULTY } from '../models/message.entity';
 import { BaseInMemoryRepositoryTest } from '../shared/in-memory.repository.test';
 import { MessageFilter } from './message.filter';
@@ -5,6 +6,20 @@ import { MessageService } from './message.service';
 
 
 class MessageServiceTest extends BaseInMemoryRepositoryTest<Message, MessageFilter> {
+  moduleProviders = [
+    {
+      provide: ConfigService,
+      useValue: {
+        get: jest.fn((key: string) => {
+          if (key === 'duplicationTimeoutMs') {
+            return 1000; // Mock the desired value
+          }
+          return undefined; // Default for other keys if needed
+        }),
+      },
+    },
+  ]
+
   getService() {
     return MessageService;
   }
