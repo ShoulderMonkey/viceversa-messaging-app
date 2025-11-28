@@ -3,6 +3,7 @@ import { BaseFilter } from "../shared/base-filter";
 
 export class MessageFilter extends BaseFilter<Message> {
     body?: string;
+    bodySearch?: string;
     senderId?: string;
     recipientId?: string;
 
@@ -19,7 +20,11 @@ export class MessageFilter extends BaseFilter<Message> {
             return false;
         }
 
-        if(this.body && this.partialMatch(entity, 'body', this.body) === false){
+        if(this.body && this.exactMatch(entity, 'body', this.body) === false){
+            return false;
+        }
+
+        if(this.bodySearch && this.partialMatch(entity, 'body', this.body) === false){
             return false;
         }
 
