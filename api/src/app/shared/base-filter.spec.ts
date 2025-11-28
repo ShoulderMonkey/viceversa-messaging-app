@@ -68,6 +68,15 @@ describe('Base Filter', () => {
             const modifiedFilter = new TestFilter({ ...testFilterArgs, createdAtTo: new Date('2024-12-31') });
             expect(modifiedFilter.matches(entity)).toBe(false);
         })
+
+        it('does match with CreatedAt in range', ()=> {
+            const entity = BASE_ENTITY_MOCKS[0]
+            const modifiedFilter = new TestFilter({ ...testFilterArgs, 
+                createdAtFrom: new Date('2024-12-30'),
+                createdAtTo: new Date('2025-01-02')
+            });
+            expect(modifiedFilter.matches(entity)).toBe(true);
+        })
     });
 
 })

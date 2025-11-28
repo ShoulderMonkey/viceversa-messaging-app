@@ -3,6 +3,7 @@ import { BaseEntity } from "./base-entity";
 import { BaseFilter } from "./base-filter";
 import { InMemoryRepository } from "./in-memory.repository";
 import { Logger } from "@nestjs/common";
+import { PaginationOptions } from "./pagination.types";
 
 
 
@@ -87,9 +88,10 @@ export abstract class BaseInMemoryRepositoryTest<Entity extends BaseEntity, Filt
 
             it('should retrieve all created entities', () => {
                 this.service.items = this.getEntitiesMock()
-                const allEntities = this.service.getAll();
+                const pagination = new PaginationOptions({limit:100})
+                const allEntities = this.service.getAll(pagination);
 
-                expect(allEntities.length).toBe(this.getEntitiesMock().length)
+                expect(allEntities.data.length).toBe(this.getEntitiesMock().length)
             });
         });
 
