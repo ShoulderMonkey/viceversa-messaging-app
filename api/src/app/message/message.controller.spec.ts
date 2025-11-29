@@ -3,6 +3,7 @@ import { MessageController } from './message.controller';
 import { MessageService } from './message.service';
 import { UserService } from '../user/user.service';
 import { ConfigService } from '@nestjs/config';
+import { EmailService } from '../email/email.service';
 
 describe('MessageController', () => {
   let controller: MessageController;
@@ -19,6 +20,12 @@ describe('MessageController', () => {
             get: jest.fn(),
           },
         },
+        {
+          provide: EmailService,
+          useValue: {
+            sendEmail: jest.fn()
+          }
+        }
       ],
     }).compile();
 

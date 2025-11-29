@@ -3,6 +3,7 @@ import { Message, MESSAGE_MOCKS, MESSAGE_MOCKS_FAULTY } from '../models/message.
 import { BaseInMemoryRepositoryTest } from '../shared/in-memory.repository.test';
 import { MessageFilter } from './message.filter';
 import { MessageService } from './message.service';
+import { EmailOptions, EmailService } from '../email/email.service';
 
 
 class MessageServiceTest extends BaseInMemoryRepositoryTest<Message, MessageFilter> {
@@ -18,6 +19,12 @@ class MessageServiceTest extends BaseInMemoryRepositoryTest<Message, MessageFilt
         }),
       },
     },
+    {
+      provide: EmailService,
+      useValue: {
+        sendEmail: jest.fn()
+      }
+    }
   ]
 
   getService() {
