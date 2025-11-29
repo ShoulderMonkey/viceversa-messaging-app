@@ -1,15 +1,13 @@
-# Viceversa | Software Engineer Interview Challenge
-
-
 # Viceversa Messaging App
 
-This is a simple real-time messaging application built with Angular and NestJS.
+This is a simple real-time messaging application built with Angular and NestJS as a Software Engineer Interview Challenge
 
 ## Features
 
 *   User registration and authentication
-*   Real-time messaging
+*   Entities filtering and paginations
 *   Message history
+*   Message duplication check
 
 ## Tech Stack
 
@@ -26,7 +24,7 @@ This is a simple real-time messaging application built with Angular and NestJS.
 
 1.  **Clone the repository:**
     ```bash
-    git clone <repository-url>
+    git clone https://github.com/ShoulderMonkey/viceversa-messaging-app
     ```
 2.  **Install dependencies:**
     ```bash
@@ -64,7 +62,8 @@ This is a simple real-time messaging application built with Angular and NestJS.
 *   **Abstract Repository Testing:** A dedicated abstract testing class has been implemented for abstract repositories. This approach minimizes redundant test code for common CRUD operations and facilitates extensibility with specific imports, providers, and supplementary tests as required by concrete repository implementations.
 *   **Abstract Filter Testing:** The testing methodology for abstract filters focuses on validating their fundamental functionalities, including the comprehensive `matches` method, to ensure robust and accurate filtering logic across all implementations.
 
-# Test Track
+# Viceversa | Software Engineer Interview Challenge
+
 *Please read instructions carefully*
 
 Use this file as part of the `README.md` in your repository, and invite su on github (@go-viceversa) when you're done!
