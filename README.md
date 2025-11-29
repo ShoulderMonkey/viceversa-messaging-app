@@ -1,5 +1,70 @@
 # Viceversa | Software Engineer Interview Challenge
 
+
+# Viceversa Messaging App
+
+This is a simple real-time messaging application built with Angular and NestJS.
+
+## Features
+
+*   User registration and authentication
+*   Real-time messaging
+*   Message history
+
+## Tech Stack
+
+*   **Frontend:** Angular
+*   **Backend:** NestJS
+*   **Monorepo:** Nx
+
+## Prerequisites
+
+*   Node.js (v20.x or higher)
+*   npm (v10.x or higher)
+
+## Getting Started
+
+1.  **Clone the repository:**
+    ```bash
+    git clone <repository-url>
+    ```
+2.  **Install dependencies:**
+    ```bash
+    npm install
+    ```
+
+## Running the Application
+
+*   **Backend (API):**
+    ```bash
+    npm run api:dev
+    ```
+    The API will be running on `http://localhost:3000`.
+
+*   **Frontend (Web):**
+    ```bash
+    npm run web:dev
+    ```
+    The frontend will be running on `http://localhost:4200`.
+
+## Running Tests
+
+*   **API Tests:**
+    ```bash
+    npm run api:test
+    ```
+
+## Architectural Choices
+
+*   **Authentication Mechanism:** An existing, proven authentication module was integrated to expedite development. For enhanced testability and ease of demonstration, the conventional password-based authentication flow has been temporarily adjusted. It is important to note that, for the convenience of evaluation, cryptographic key files (e.g., PEM files) are included in this repository, a practice that would typically be avoided in a production environment due to security considerations.
+*   **In-memory Data Store:** The application utilizes a custom, abstract repository pattern for in-memory data storage. This design choice provides a clean separation of concerns and a consistent interface for CRUD operations. It is complemented by a generic and extendable filtering class, allowing for tailored and entity-specific filtering logic while maintaining a common structure.
+
+## Testing Strategy for Abstract Classes
+
+*   **Abstract Repository Testing:** A dedicated abstract testing class has been implemented for abstract repositories. This approach minimizes redundant test code for common CRUD operations and facilitates extensibility with specific imports, providers, and supplementary tests as required by concrete repository implementations.
+*   **Abstract Filter Testing:** The testing methodology for abstract filters focuses on validating their fundamental functionalities, including the comprehensive `matches` method, to ensure robust and accurate filtering logic across all implementations.
+
+# Test Track
 *Please read instructions carefully*
 
 Use this file as part of the `README.md` in your repository, and invite su on github (@go-viceversa) when you're done!
