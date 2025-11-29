@@ -3,6 +3,7 @@ import { Message } from '../models/message.entity';
 import { InMemoryRepository } from '../shared/in-memory.repository';
 import { MessageFilter } from './message.filter';
 import { ConfigService } from '@nestjs/config';
+import { EmailService } from '../email/email.service';
 
 @Injectable()
 export class MessageService extends InMemoryRepository<Message, MessageFilter> {
@@ -12,7 +13,8 @@ export class MessageService extends InMemoryRepository<Message, MessageFilter> {
     duplicationTimespanMs = 1000
 
     constructor(
-        private config: ConfigService
+        private config: ConfigService,
+        private emailService: EmailService
     ) {
         super(Message);
         this.duplicationTimespanMs = this.config.get('duplicationTimeoutMs')
@@ -20,6 +22,7 @@ export class MessageService extends InMemoryRepository<Message, MessageFilter> {
 
     createOne(item: Message): Message {
         this.checkDuplicatedMessages(item)
+        this.emailService.sendEmail({message: item})
         return super.createOne(item)
     }
 

@@ -5,5 +5,6 @@ import { UserModule } from '../user/user.module';
 @Module({
   imports: [UserModule],
   providers: [EmailService],
+  exports: [EmailService]
 })
 export class EmailModule {}
