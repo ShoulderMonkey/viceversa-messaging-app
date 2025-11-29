@@ -16,10 +16,12 @@ export class EmailService {
     ){}
     sendEmail(options: EmailOptions){
         const recipientUser: User = this.userService.findById(options.message.recipientId)
-        const recipientEmail = recipientUser
+        const recipientEmail = recipientUser.email
+        const senderUser: User = this.userService.findById(options.message.senderId)
+        const senderEmail = senderUser.email
         //mocking email sent
         setTimeout(() => {
-            this.logger.debug(`Email sent to ${recipientEmail} with message: ${options.message.body}`)
+            this.logger.debug(`Email sent to ${recipientEmail} from ${senderEmail} with message: ${options.message.body}`)
         }, 1000);
     }
 }
