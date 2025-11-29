@@ -7,6 +7,7 @@ import { AuthModule } from './auth/auth.module';
 import { SeederModule } from './seeder/seeder.module';
 import { UserModule } from './user/user.module';
 import { MessageModule } from './message/message.module';
+import { EmailModule } from './email/email.module';
 
 @Module({
   imports: [
@@ -19,6 +20,7 @@ import { MessageModule } from './message/message.module';
     SeederModule,
     UserModule,
     MessageModule,
+    EmailModule,
   ],
   controllers: [AppController],
   providers: [AppService],
