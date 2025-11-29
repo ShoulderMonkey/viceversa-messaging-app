@@ -71,21 +71,34 @@ export abstract class BaseFilter<T extends BaseEntity> {
      * Used for partial matching of fields
      * @param entity entity to compare
      * @param field field to compare
-     * @param value value to match
+     * @param searchKey string to search
      * @returns boolean indicating if the field matches the value
      */
     partialMatch(entity: T, field: keyof T, searchKey: string): boolean {
-        const text = entity[field] as string
-        if (searchKey && text.includes(searchKey)) {
+        const text = (entity[field] as string).toLowerCase()
+        if (searchKey && text.includes(searchKey.toLowerCase())) {
             return true
         }
 
         return false
     }
 
-    fullTextMatch(entity: T, field: keyof T, searchKeys: string[]): boolean {
+    fullTextMatch(entity: T, field: keyof T, searchString: string): boolean {
+        const searchKeys = searchString.split(' ')
+        console.log(searchKeys);
         
-
-        return false;
+        if(!searchKeys || searchKeys.length <= 0){
+            console.log('return 1 false');
+            
+            return false;
+        }
+        for (const key of searchKeys) {
+            if(!this.partialMatch(entity, field, key)){
+                console.log('return 2 false');
+                return false
+            }
+        }
+        console.log('return 3 true');
+        return true;
     }
 }
