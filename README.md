@@ -62,7 +62,15 @@ This is a simple real-time messaging application built with Angular and NestJS a
 *   **Abstract Repository Testing:** A dedicated abstract testing class has been implemented for abstract repositories. This approach minimizes redundant test code for common CRUD operations and facilitates extensibility with specific imports, providers, and supplementary tests as required by concrete repository implementations.
 *   **Abstract Filter Testing:** The testing methodology for abstract filters focuses on validating their fundamental functionalities, including the comprehensive `matches` method, to ensure robust and accurate filtering logic across all implementations.
 
-# Viceversa | Software Engineer Interview Challenge
+## Frontend Application
+
+Despite not being explicitly requested, a basic frontend application has been developed to demonstrate additional skills in client-side development and provide a more complete user experience for interacting with the API.
+
+## Future Enhancements & Time Constraints
+
+Due to the allocated time constraints, the implementation of WebSocket functionality for real-time messaging could not be fully realized. This feature would typically enhance the user experience by providing instant message delivery and updates.
+
+# Test Track
 
 *Please read instructions carefully*
 
