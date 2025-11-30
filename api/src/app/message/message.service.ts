@@ -22,6 +22,8 @@ export class MessageService extends InMemoryRepository<Message, MessageFilter> {
 
     createOne(item: Message): Message {
         this.checkDuplicatedMessages(item)
+        //add any other events to be triggered here
+        //NOTE: could have used @nestjs/event-emitter
         this.emailService.sendEmail({message: item})
         return super.createOne(item)
     }

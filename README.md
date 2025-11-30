@@ -60,6 +60,7 @@ This is a simple real-time messaging application built with Angular and NestJS a
 
 *   **Authentication Mechanism:** An existing, proven authentication module was integrated to expedite development. For enhanced testability and ease of demonstration, the conventional password-based authentication flow has been temporarily adjusted.
 *   **In-memory Data Store:** The application utilizes a custom, abstract repository pattern for in-memory data storage. This design choice provides a clean separation of concerns and a consistent interface for CRUD operations. It is complemented by a generic and extendable filtering class, allowing for tailored and entity-specific filtering logic while maintaining a common structure.
+*   **Email Event Handling:** The current implementation triggers email events via a direct method call. For enhanced modularity and scalability, leveraging a dedicated event-emitter package, such as `@nestjs/event-emitter`, would provide a cleaner and more robust event-driven architecture.
 
 ## Testing Strategy for Abstract Classes
 
