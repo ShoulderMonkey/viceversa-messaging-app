@@ -1,14 +1,14 @@
+import { CommonModule } from "@angular/common";
 import { Component } from '@angular/core';
+import { FormControl, ReactiveFormsModule, Validators } from '@angular/forms';
+import { MatButtonModule } from '@angular/material/button';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatIconModule } from "@angular/material/icon";
+import { MatInputModule } from "@angular/material/input";
 import { ActivatedRoute } from '@angular/router';
 import { Message, User } from '@viceversa-messaging-app/api-interfaces';
-import { combineLatest, map, Observable, tap } from 'rxjs';
-import { CommonModule } from "@angular/common";
-import { MatFormField, MatInput, MatInputModule } from "@angular/material/input";
-import { MatIcon, MatIconModule } from "@angular/material/icon";
-import { FormControl, ReactiveFormsModule, Validators } from '@angular/forms';
 import { AuthService } from '@viceversa-messaging-app/auth';
-import { MatButton, MatButtonModule } from '@angular/material/button';
-import { MatFormFieldModule } from '@angular/material/form-field';
+import { combineLatest, map, Observable, tap } from 'rxjs';
 import { MessageService } from '../../services/message.service';
 @Component({
   selector: 'app-chat',
@@ -74,6 +74,8 @@ export class Chat {
       body: body
     }
 
-    this.messageService.createOne(message).subscribe()
+    this.messageService.createOne(message).pipe(
+      tap(()=> this.messages.push(message))
+    ).subscribe()
   }
 }
