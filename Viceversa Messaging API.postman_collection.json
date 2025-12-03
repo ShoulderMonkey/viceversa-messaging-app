@@ -45,19 +45,26 @@
 					"name": "Find Users with filters",
 					"request": {
 						"auth": {
-							"type": "noauth"
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{bearer}}",
+									"type": "string"
+								}
+							]
 						},
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{baseURL}}/api/user/findMany?username=alice&page=1&limit=10",
+							"raw": "{{baseURL}}/api/user/find-many?username=alice&page=1&limit=10",
 							"host": [
 								"{{baseURL}}"
 							],
 							"path": [
 								"api",
 								"user",
-								"findMany"
+								"find-many"
 							],
 							"query": [
 								{
@@ -122,7 +129,28 @@
 					"name": "Find Messages with filters",
 					"request": {
 						"method": "GET",
-						"header": []
+						"header": [],
+						"url": {
+							"raw": "{{baseURL}}/api/message/find-many?senderId=user-1&limit=10",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"api",
+								"message",
+								"find-many"
+							],
+							"query": [
+								{
+									"key": "senderId",
+									"value": "user-1"
+								},
+								{
+									"key": "limit",
+									"value": "10"
+								}
+							]
+						}
 					},
 					"response": []
 				}
